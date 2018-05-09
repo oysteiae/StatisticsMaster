@@ -89,8 +89,12 @@ def compute_dice_sen_spe_deep_medic(save_name, path_to_deep_medic_predictions, l
         print("Prediction:", deep_medic_brain_masks[i])
         pred = nib.load(deep_medic_brain_masks[i])
         label = nib.load(name)
+        
+        print(pred.shape)
+        print(label.shape)
 
         dsc, sen, spe = compute_scores(pred.get_data(), label.get_data())
+        print(dsc)
         score_file.write(name + "\t" + str(dsc) + "\t" + str(sen) + "\t" + str(spe) + "\n")
         i += 1
 
