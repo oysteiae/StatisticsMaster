@@ -84,6 +84,7 @@ def compute_dice_sen_spe_deep_medic(save_name, path_to_deep_medic_predictions, l
     label_names = open(label_names_file, 'r')
     i = 0
     for name in label_names:
+        name = name.rstrip()
         print("Label:", name)
         print("Prediction:", deep_medic_brain_masks[i])
         pred = nib.load(deep_medic_brain_masks[i])
