@@ -83,8 +83,15 @@ def compute_dice_sen_spe_deep_medic(save_name, path_to_deep_medic_predictions, l
 
     deep_medic_brain_masks = sorted(deep_medic_brain_masks)
     label_names = open(label_names_file, 'r')
-    i = 0
+    
+    label_names_list = []
     for name in label_names:
+        label_names_list.append(name)
+
+    label_names_list = sorted(label_names_list)
+
+    i = 0
+    for name in label_names_list:
         name = name.rstrip()
         print("Label:", name)
         print("Prediction:", deep_medic_brain_masks[i])
