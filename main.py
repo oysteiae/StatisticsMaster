@@ -3,6 +3,7 @@ from os import listdir as _listdir, getcwd, mkdir, path
 from os.path import isfile as _isfile,join as  _join, abspath, splitext
 import numpy as np
 import nibabel as nib
+import argparse
 
 # Taken from https://github.com/GUR9000/Deep_MRI_brain_extraction
 def load_files(data_file_location):
@@ -76,27 +77,28 @@ def compute_dice_sen_spe_deep_medic(save_name, path_to_deep_medic_predictions, l
 
     for file in deep_medic_predictions:
         a = file.split('_')
-        if(a[-1] == "_Segm.nii.gz"):
+        if(a[-1] == "Segm.nii.gz"):
             deep_medic_brain_masks.append(file)
-            deep_medic_file_name.append(file.replace("_pred_Segm.nii.gz", ".nii.gz"))
 
     deep_medic_brain_masks = sorted(deep_medic_brain_masks)
     label_names = open(label_names_file, 'r')
-
-    for i in range(label_names):
+    i = 0
+    for name in label_names:
+        print("Label:", name)
+        print("Prediction:", deep_medic_brain_masks[i])
         pred = nib.load(deep_medic_brain_masks[i])
-        label = nib.load(label_names[i])
+        label = nib.load(name)
 
-        dsc, sen, spe = compute_dice_sen_spe_deep_medic(pred, label)
+        dsc, sen, spe = compute_dice_sen_spe_deep_medic(pred.get_data(), label.get_data())
         name = label_names.split('/')[-1]
         score_file.write(name + "\t" + str(dsc) + "\t" + str(sen) + "\t" + str(spe) + "\n")
-
+        i += 1
 
 def main():
     parser = argparse.ArgumentParser(description='Evaluating deepmedic')
     parser.add_argument('--savename', dest='save_name', required=True, type=str, help='Path to the corresponding labels')
     parser.add_argument('--predictions', dest='predictions', required=True, type=str, nargs='+', help='Path to the data')
-    parser.add_argument('--label_file_names', dest='label_file_names', required=True, type=str, help='Path to the corresponding labels')
+    parser.add_argument('--labelfilenames', dest='label_file_names', required=True, type=str, help='Path to the corresponding labels')
     args = parser.parse_args()
 
     compute_dice_sen_spe_deep_medic(args.save_name, args.predictions, args.label_file_names)
