@@ -34,17 +34,17 @@ def compute_scores(pred, label):
     print(label.shape)
     print(pred.shape)
     shape = pred.shape
-    TP = 0
-    TN = 0
-    FP = 0
-    FN = 0
+    TP = 0.0
+    TN = 0.0
+    FP = 0.0
+    FN = 0.0
 
     for i in range(0, shape[0]):
         if (i % 25 == 0):
             print("Comleted", float(i) / float(shape[0]) * 100, "%")
         for j in range(0, shape[1]):
             for k in range(0, shape[2]):
-                if (pred[i][j][k] == 1 and label[i][j][k] >= 1):
+		if (pred[i][j][k] == 1 and label[i][j][k] >= 1):
                     TP += 1
                 elif (pred[i][j][k] == 1 and label[i][j][k] == 0):
                     FP += 1
@@ -53,18 +53,19 @@ def compute_scores(pred, label):
                 elif (pred[i][j][k] == 0 and label[i][j][k] == 0):
                     TN += 1
 
+
     if ((2 * TP + FP + FN) == 0):
         dice_coefficient = 1.0
     else:
-        dice_coefficient = (2 * TP) / (2 * TP + FP + FN)
+        dice_coefficient = float((2 * TP)) / float((2 * TP + FP + FN))
     if ((TP + FN) == 0):
         sensitivity = 1.0
     else:
-        sensitivity = TP / (TP + FN)
+        sensitivity = float(TP) / float((TP + FN))
     if ((TN + FP) == 0):
         specificity = 1.0
     else:
-        specificity = TN / (TN + FP)
+        specificity = float(TN) / float((TN + FP))
 
     return dice_coefficient, sensitivity, specificity
 
@@ -87,13 +88,13 @@ def compute_dice_sen_spe_deep_medic(save_name, path_to_deep_medic_predictions, l
         name = name.rstrip()
         print("Label:", name)
         print("Prediction:", deep_medic_brain_masks[i])
-        pred = nib.load(deep_medic_brain_masks[i])
-        label = nib.load(name)
-        
-        print(pred.shape)
+        pred = nib.load(deep_medic_brain_masks[i]).get_data()
+        label = nib.load(name).get_data()
+	print(pred.shape)
         print(label.shape)
-
-        dsc, sen, spe = compute_scores(pred.get_data(), label.get_data())
+	pred = (pred > 0).astype('int16')
+        label = (label > 0).astype('int16')
+	dsc, sen, spe = compute_scores(pred, label)
         print(dsc)
         score_file.write(name + "\t" + str(dsc) + "\t" + str(sen) + "\t" + str(spe) + "\n")
         i += 1
