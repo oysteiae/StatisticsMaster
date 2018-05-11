@@ -69,6 +69,10 @@ def compute_scores(pred, label):
 
     return dice_coefficient, sensitivity, specificity
 
+def sort_func(s):
+   sort_string = s.split('/')[-1]
+   return sort_string
+
 def compute_dice_sen_spe_deep_medic(save_name, path_to_deep_medic_predictions, label_names_file):
     score_file = open(save_name + "_scores.tsv", 'w')
     score_file.write("name\tdcs\tsen\tspe\n")
@@ -81,15 +85,15 @@ def compute_dice_sen_spe_deep_medic(save_name, path_to_deep_medic_predictions, l
         if(a[-1] == "Segm.nii.gz"):
             deep_medic_brain_masks.append(file)
 
-    deep_medic_brain_masks = sorted(deep_medic_brain_masks)
+    deep_medic_brain_masks = sorted(deep_medic_brain_masks, key=sort_func)
     label_names = open(label_names_file, 'r')
     
     label_names_list = []
     for name in label_names:
         label_names_list.append(name)
 
-    label_names_list = sorted(label_names_list)
-
+    label_names_list = sorted(label_names_list, key=sort_func)
+    
     i = 0
     for name in label_names_list:
         name = name.rstrip()
