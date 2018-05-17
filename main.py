@@ -4,6 +4,7 @@ from os.path import isfile as _isfile,join as  _join, abspath, splitext
 import numpy as np
 import nibabel as nib
 import argparse
+from compute_scores import compute_scores
 
 # Taken from https://github.com/GUR9000/Deep_MRI_brain_extraction
 def load_files(data_file_location):
@@ -28,46 +29,6 @@ def load_files(data_file_location):
         combined_list = combined_list + elem
 
     return combined_list
-
-def compute_scores(pred, label):
-    assert pred.shape == label.shape, "Shape mismatch between prediction and label when calculating scores"
-    print(label.shape)
-    print(pred.shape)
-    shape = pred.shape
-    TP = 0.0
-    TN = 0.0
-    FP = 0.0
-    FN = 0.0
-
-    for i in range(0, shape[0]):
-        if (i % 25 == 0):
-            print("Comleted", float(i) / float(shape[0]) * 100, "%")
-        for j in range(0, shape[1]):
-            for k in range(0, shape[2]):
-		if (pred[i][j][k] == 1 and label[i][j][k] >= 1):
-                    TP += 1
-                elif (pred[i][j][k] == 1 and label[i][j][k] == 0):
-                    FP += 1
-                elif (pred[i][j][k] == 0 and label[i][j][k] >= 1):
-                    FN += 1
-                elif (pred[i][j][k] == 0 and label[i][j][k] == 0):
-                    TN += 1
-
-
-    if ((2 * TP + FP + FN) == 0):
-        dice_coefficient = 1.0
-    else:
-        dice_coefficient = float((2 * TP)) / float((2 * TP + FP + FN))
-    if ((TP + FN) == 0):
-        sensitivity = 1.0
-    else:
-        sensitivity = float(TP) / float((TP + FN))
-    if ((TN + FP) == 0):
-        specificity = 1.0
-    else:
-        specificity = float(TN) / float((TN + FP))
-
-    return dice_coefficient, sensitivity, specificity
 
 def sort_func(s):
    sort_string = s.split('/')[-1]
@@ -101,11 +62,9 @@ def compute_dice_sen_spe_deep_medic(save_name, path_to_deep_medic_predictions, l
         print("Prediction:", deep_medic_brain_masks[i])
         pred = nib.load(deep_medic_brain_masks[i]).get_data()
         label = nib.load(name).get_data()
-	print(pred.shape)
-        print(label.shape)
-	pred = (pred > 0).astype('int16')
+        pred = (pred > 0).astype('int16')
         label = (label > 0).astype('int16')
-	dsc, sen, spe = compute_scores(pred, label)
+        dsc, sen, spe = compute_scores(pred, label)
         print(dsc)
         score_file.write(name + "\t" + str(dsc) + "\t" + str(sen) + "\t" + str(spe) + "\n")
         i += 1
