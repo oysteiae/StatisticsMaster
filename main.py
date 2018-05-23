@@ -1,6 +1,5 @@
 import os
-from os import listdir as _listdir, getcwd, mkdir, path
-from os.path import isfile as _isfile,join as  _join, abspath, splitext
+
 import numpy as np
 import nibabel as nib
 import argparse
