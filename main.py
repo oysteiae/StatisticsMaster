@@ -77,5 +77,3 @@ def main():
     args = parser.parse_args()
 
     compute_dice_sen_spe_deep_medic(args.save_name, args.predictions, args.label_file_names)
-
-main()
