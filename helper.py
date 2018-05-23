@@ -1,3 +1,27 @@
+# Taken from https://github.com/GUR9000/Deep_MRI_brain_extraction
+def load_files(data_file_location):
+    data = []
+
+    startswith = None
+    endswith = None
+    contains = None
+    contains_not = None
+
+    for path in data_file_location:
+        gg = [(_join(path, f) if path != "." else f) for f in _listdir(path) if
+              _isfile(_join(path, f)) and (startswith == None or f.startswith(startswith)) and (
+              endswith == None or f.endswith(endswith)) and (contains == None or contains in f) and (
+              contains_not == None or (not (contains_not in f)))]
+        data.append(gg)
+
+    combined_list = []
+    # Sort the lists:
+    for i in range(len(data)):
+        elem = sorted(data[i])
+        combined_list = combined_list + elem
+
+    return combined_list
+
 def compute_scores(pred, label):
     assert pred.shape == label.shape, "Shape mismatch between prediction and label when calculating scores"
     shape = pred.shape
