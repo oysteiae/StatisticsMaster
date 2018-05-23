@@ -5,6 +5,13 @@ import matplotlib.pyplot as plt
 from nilearn import plotting
 import nibabel as nib
 
+def load(x):
+    data = nib.load(x).get_data()
+    print(data.shape)
+    if(data.shape != (221, 186, 221)):
+        print(x)
+    return data
+
 def visualize_errors(prediction_directory, label_directory):
     prediction_files = load_files([prediction_directory])
     label_files = load_files([label_directory])
@@ -24,7 +31,7 @@ def visualize_errors(prediction_directory, label_directory):
     # plotting.plot_anat(nif)
     # plotting.plot_roi(nif, bg_img=nib.load(prediction_files[0]))
     plotting.show()
-    error_plot.savefig("ErrorOasisCNN")
+    error_plot.savefig("ErrorLBPA40CNN")
 
 
-visualize_errors("D:\\Master\\predictedOASISCNN\\predicted\\", "D:\\MRISCANS\\NormalizedOASIS\\labels\\")
+visualize_errors("D:\\Master\\predictedLBPA40CNN\\predicted\\", "D:\\MRISCANS\\NormalizedLBPA40Resampled\\labels\\")
