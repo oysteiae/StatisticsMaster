@@ -1,7 +1,7 @@
 import nilearn
 import nibabel as nib
 from nilearn import plotting, image
-from compute_scores import compute_scores
+from helper import compute_scores
 import numpy as np
 
 def expand_dim_of_nifti_image(nifti_image):
