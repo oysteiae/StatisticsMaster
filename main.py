@@ -46,9 +46,11 @@ def compute_dice_sen_spe_deep_medic(save_name, path_to_deep_medic_predictions, l
 
 def main():
     parser = argparse.ArgumentParser(description='Evaluating deepmedic')
-    parser.add_argument('--savename', dest='save_name', required=True, type=str, help='Path to the corresponding labels')
+    parser.add_argument('--savename', dest='save_name', required=True, type=str, help='Save name for the score file')
     parser.add_argument('--predictions', dest='predictions', required=True, type=str, nargs='+', help='Path to the data')
     parser.add_argument('--labelfilenames', dest='label_file_names', required=True, type=str, help='Path to the corresponding labels')
     args = parser.parse_args()
 
     compute_dice_sen_spe_deep_medic(args.save_name, args.predictions, args.label_file_names)
+
+main()
