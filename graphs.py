@@ -111,8 +111,8 @@ def show_graph_accuracy():
 
     # graph_accuracy("D:\\Master\\Experiments\\UnetLITS\\UnetLITS_logs.tsv", 2)
     # graph_accuracy("D:\\Master\\Experiments\\CNNLITS\\CNNLITS_logs.tsv", 2)
-    # graph_loss_and_val_loss("C:\\Users\\oyste\\Documents\\Master\\AllExperimentsEpic\\Experiments\\CNNAll\\CNNAll_logs.tsv")
-    graph_loss_and_val_loss("C:\\Users\\oyste\\Documents\\Master\\AllExperimentsEpic\\Experiments\\UnetAll\\UnetAll_logs.tsv")
+    graph_loss_and_val_loss("C:\\Users\\oyste\\Documents\\Master\\AllExperimentsEpic\\Experiments\\CNNAll\\CNNAll_logs.tsv")
+    # graph_loss_and_val_loss("C:\\Users\\oyste\\Documents\\Master\\AllExperimentsEpic\\Experiments\\UnetAll\\UnetAll_logs.tsv")
 
     # plt.xlim((0,60000))
     # plt.ylim((0,7000))

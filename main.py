@@ -6,7 +6,7 @@ import argparse
 from helper import compute_scores, load_files
 
 def sort_func(s):
-   sort_string = s.split('/')[-1]
+   sort_string = s.split('/')[-1].rstrip()
    return sort_string
 
 def compute_dice_sen_spe_deep_medic(save_name, path_to_deep_medic_predictions, label_names_file):
