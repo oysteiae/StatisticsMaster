@@ -102,6 +102,17 @@ def graph_loss_and_val_loss(logs_file_location):
 
     plt.show()
 
+def graph_acc_and_val_acc(logs_file_location):
+    x, y = graph_accuracy(logs_file_location, 1)
+    val_x, val_y = graph_accuracy(logs_file_location, 5)
+
+    plt.plot(x, y)
+    plt.plot(val_x, val_y)
+
+    plt.legend(['Loss', 'Validation loss'])
+    plt.show()
+
+
 # graph_accuracy("D:\\Master\\Experiments\\UnetBiggerPatch\\UnetBiggerPatch_logs.tsv", 1)
 def show_graph_accuracy():
     # x_1, y_1 = graph_time_and_epochs("UnetTest8Batch1GPU_logs.tsv")
@@ -111,7 +122,8 @@ def show_graph_accuracy():
 
     # graph_accuracy("D:\\Master\\Experiments\\UnetLITS\\UnetLITS_logs.tsv", 2)
     # graph_accuracy("D:\\Master\\Experiments\\CNNLITS\\CNNLITS_logs.tsv", 2)
-    graph_loss_and_val_loss("C:\\Users\\oyste\\Documents\\Master\\AllExperimentsEpic\\Experiments\\CNNAll\\CNNAll_logs.tsv")
+    # graph_acc_and_val_acc("D:\\Master\\Experiments\\CNNAll\\CNNAll_logs.tsv")
+    graph_acc_and_val_acc("D:\\Master\\UnetShowdown\\UnetSmallerPatchAllAgain\\UnetSmallerPatchAllAgain_logs.tsv")
     # graph_loss_and_val_loss("C:\\Users\\oyste\\Documents\\Master\\AllExperimentsEpic\\Experiments\\UnetAll\\UnetAll_logs.tsv")
 
     # plt.xlim((0,60000))

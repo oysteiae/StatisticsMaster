@@ -39,4 +39,4 @@ def box_plot(path_to_scores_cnn, path_to_scores_unet, path_to_scores_deepmedic, 
                         rotation=45, fontsize=8)
     plt.show()
 
-box_plot("C:\\Users\\oyste\\Documents\\Master\\Experiments\\CNNAll\\CNNAll_scores.tsv", "C:\\Users\\oyste\\Documents\\Master\\Experiments\\UnetAll\\UnetAll_scores.tsv", "C:\\Users\\oyste\\Documents\\Master\\deepmedicExperiments\\DeepMedicAll_scores.tsv", 1)
+box_plot("D:\\Master\\Experiments\\CNNAll\\CNNAll_scores.tsv", "D:\\Master\\UnetSmallerPatch\\UnetSmallerPatchAllAgain\\testing_indices_UnetSmallerPatchAllAgain_scores.tsv", "D:\\Master\\deepmedicexperiments\\DeepMedicAll_scores.tsv", 1)
