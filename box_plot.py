@@ -32,11 +32,16 @@ def box_plot(path_to_scores_cnn, path_to_scores_unet, path_to_scores_deepmedic, 
     ax = fig.add_subplot(111)
     # Create the boxplot
     bp = ax.boxplot(data_to_plot)
+    ax.set_ylabel("Dice score", fontsize=12)
+    ax.set_xlabel("Architecture", fontsize=12)
 
     architectures = ["CNN", "U-Net", "DeepMedic"]
     ax.set_ylim(bottom, top)
     ax.set_xticklabels(architectures,
-                        rotation=45, fontsize=8)
-    plt.show()
+                        rotation=45, fontsize=15)
 
-box_plot("C:\\Users\\oyste\\Documents\\Master\\Experiments\\CNNAll\\CNNAll_scores.tsv", "C:\\Users\\oyste\\Documents\\Master\\Experiments\\UnetAll\\UnetAll_scores.tsv", "C:\\Users\\oyste\\Documents\\Master\\deepmedicExperiments\\DeepMedicAll_scores.tsv", 1)
+    plt.gcf().subplots_adjust(bottom=0.21)
+    plt.show()
+    fig.savefig("C:\\Users\\oyste\\Documents\\Master\\graphs\\BoxPlotAll.png")
+
+box_plot("C:\\Users\\oyste\\Documents\\Master\\ExperimentsFinal\\CNNAllFinal\\testing_indices_CNNAllFinal_scores.tsv", "C:\\Users\\oyste\\Documents\\Master\\ExperimentsFinal\\UnetAllFinal\\testing_indices_UnetAllFinal_scores.tsv", "C:\\Users\\oyste\\Documents\\Master\\deepmedicExperiments\\scores\\DeepMedicAll_scores.tsv", 1)

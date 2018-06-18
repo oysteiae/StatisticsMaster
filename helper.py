@@ -48,10 +48,15 @@ def compute_scores(pred, label):
                     TN += 1
 
 
-    print(TP)
-    print(TN)
-    print(FP)
-    print(FN)
+    print(TP) # 1343322.0
+    print(TN) # 46602103.0
+    print(FP) # 381066.0
+    print(FN) # 22600.0
+
+
+
+
+
 
     if ((2 * TP + FP + FN) == 0):
         dice_coefficient = 1.0
