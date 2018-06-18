@@ -1,7 +1,11 @@
 from os import listdir as _listdir, getcwd, mkdir, path
 from os.path import isfile as _isfile,join as  _join, abspath, splitext
 
-# Taken from https://github.com/GUR9000/Deep_MRI_brain_extraction
+def sort_func(s):
+   sort_string = s.split('/')[-1].rstrip()
+   return sort_string
+
+
 def load_files(data_file_location):
     data = []
 
@@ -23,7 +27,18 @@ def load_files(data_file_location):
         elem = sorted(data[i])
         combined_list = combined_list + elem
 
+    combined_list = strip_files_of_doubles(combined_list)
+    combined_list = sorted(combined_list, key=sort_func)
     return combined_list
+
+def strip_files_of_doubles(files):
+    new_files = []
+    for file in files:
+        split = file.split('.')
+        if (split[-1] != "img" and split[-1] != "mat"):
+            new_files.append(file)
+
+    return new_files
 
 def compute_scores(pred, label):
     assert pred.shape == label.shape, "Shape mismatch between prediction and label when calculating scores"

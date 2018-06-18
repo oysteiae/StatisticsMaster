@@ -31,8 +31,8 @@ def visualize_errors(prediction_directory, label_directory):
     prediction_files = load_files([prediction_directory])
     label_files = load_files([label_directory])
 
-    label_files = pick_oasis_data(prediction_files, label_files)
-    # label_files = pick_lbpa40_data(prediction_files, label_files)
+    # label_files = pick_oasis_data(prediction_files, label_files)
+    label_files = pick_lbpa40_data(prediction_files, label_files)
     # label_files = pick_st_olavs_data(prediction_files, label_files)
 
     predictions = [nib.load(x) for x in prediction_files]
@@ -55,7 +55,7 @@ def visualize_errors(prediction_directory, label_directory):
     # plotting.plot_anat(nif)
     # plotting.plot_roi(nif, bg_img=nib.load(prediction_files[0]))
     plotting.show()
-    error_plot.savefig("ErrorOASISDeepMedic")
+    error_plot.savefig("ErrorOASISCNN")
 
 
-visualize_errors("D:\\Master\\predicted\\deepMedicpredicted\\oasis\\", "D:\\MRISCANS\\NormalizedOASIS\\labels\\")
+visualize_errors("D:\\Master\\predicted\\predicted\\oasis\\", "D:\\MRISCANS\\NormalizedOASIS\\labels\\")

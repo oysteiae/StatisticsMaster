@@ -49,7 +49,7 @@ def get_y_and_x_lists(logs1, logs2, index):
 def graph_accuracy(file_name, index):
     x = []
     y = []
-    log_avg_point_per = 100
+    log_avg_point_per = 500
     accumulated_y = 0
 
     with open(file_name, 'r') as log:
@@ -110,15 +110,47 @@ def graph_acc_and_val_acc(logs_file_location):
     plt.plot(val_x, val_y)
 
     plt.legend(['Accuracy', 'Validation accuracy'])
-
     plt.show()
 
+def graph_time_and_epochs(file_name):
+    epoch = []
+    time = []
+    time_per_epoch = []
+    with open(file_name, 'r') as log:
+        log = csv.reader(log, delimiter='\t')
+        first = True
+        i = 0
+        for row in log:
+            if(first):
+                first = False
+                continue
+            epoch.append(int(row[0]))
+            time.append(float(row[3]))
+            if(i > 1):
+                time_per_epoch.append(time[-1] - time[-2])
+            i += 1
+
+    print("%.5f" % (sum(time_per_epoch)/len(time_per_epoch)))
+
+    return epoch, time
+
+>>>>>>> bbfcee33e2f3b46d9bf93bb4990f5afd5699d1c9
 # graph_accuracy("D:\\Master\\Experiments\\UnetBiggerPatch\\UnetBiggerPatch_logs.tsv", 1)
 def show_graph_accuracy():
-    # x_1, y_1 = graph_time_and_epochs("UnetTest8Batch1GPU_logs.tsv")
-    # x_2, y_2 = graph_time_and_epochs("UnetTest8Batch2GPU_logs.tsv")
-    # x_3, y_3 = graph_time_and_epochs("unetBatchSize8TitanX_logs.tsv")
-    # x_4, y_4 = graph_time_and_epochs("unet1080BatchSize4_logs.tsv")
+    # graph_acc_and_val_acc("D:\\Master\\DefinitiveFinalExperiments\\UnetOnlyOASIS32Final\\UnetOnlyOASIS32Final_logs.tsv")
+    graph_time_and_epochs("D:\\Master\\AllExperiments\\CNNTest1GPUs\\CNNTest1GPUs_logs.tsv")
+    # graph_acc_and_val_acc("D:\\Master\\DefinitiveFinalExperiments\\UnetFinalLBPA40\\UnetFinalLBPA40_logs.tsv")
+    # graph_acc_and_val_acc("D:\\Master\\DefinitiveFinalExperiments\\UnetOnlyOASIS64Final\\UnetOnlyOASIS64Final_logs.tsv")
+    # graph_acc_and_val_acc("D:\\Master\\DefinitiveFinalExperiments\\UnetOnlyOASIS32Final\\UnetOnlyOASIS32Final_logs.tsv")
+    # graph_acc_and_val_acc("D:\\Master\\DefinitiveFinalExperiments\\UnetOnlyOASIS64Final\\UnetOnlyOASIS64Final_logs.tsv")
+    # graph_acc_and_val_acc("D:\\Master\\DefinitiveFinalExperiments\\UnetOnlyStOlavsFinal\\UnetOnlyStOlavsFinal_logs.tsv")
+    # graph_loss_and_val_loss("D:\\Master\\DefinitiveFinalExperiments\\UnetOnlyOASIS32Final\\UnetOnlyOASIS32Final_logs.tsv")
+    # graph_loss_and_val_loss("D:\\Master\\DefinitiveFinalExperiments\\UnetFinalLBPA40\\UnetFinalLBPA40_logs.tsv")
+    #
+    # graph_acc_and_val_acc("D:\\Master\\DefinitiveFinalExperiments\\UnetFinalDataNotResampled\\UnetFinalDataNotResampled_logs.tsv")
+    # graph_loss_and_val_loss("D:\\Master\\DefinitiveFinalExperiments\\Unet40FromAll\\Unet40FromAll_logs.tsv")
+    # graph_acc_and_val_acc("D:\\Master\\DefinitiveFinalExperiments\\UnetSmallerPatchStOlavsLBPA40\\UnetSmallerPatchStOlavsLBPA40_logs.tsv")
+    # graph_acc_and_val_acc("D:\\Master\\DefinitiveFinalExperiments\\UnetSmallerPatchStOlavsOASIS\\UnetSmallerPatchStOlavsOASIS_logs.tsv")
 
     # graph_accuracy("D:\\Master\\Experiments\\UnetLITS\\UnetLITS_logs.tsv", 2)
     # graph_accuracy("D:\\Master\\Experiments\\CNNLITS\\CNNLITS_logs.tsv", 2)
@@ -142,5 +174,7 @@ def show_graph_accuracy():
     # plt.legend(['1 Tesla P100', '2 Tesla P100', 'Titan X'], loc='lower right')
     #
     # plt.show()
+
+
 
 show_graph_accuracy()

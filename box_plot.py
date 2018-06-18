@@ -44,4 +44,4 @@ def box_plot(path_to_scores_cnn, path_to_scores_unet, path_to_scores_deepmedic, 
     plt.show()
     fig.savefig("C:\\Users\\oyste\\Documents\\Master\\graphs\\BoxPlotAll.png")
 
-box_plot("C:\\Users\\oyste\\Documents\\Master\\ExperimentsFinal\\CNNAllFinal\\testing_indices_CNNAllFinal_scores.tsv", "C:\\Users\\oyste\\Documents\\Master\\ExperimentsFinal\\UnetAllFinal\\testing_indices_UnetAllFinal_scores.tsv", "C:\\Users\\oyste\\Documents\\Master\\deepmedicExperiments\\scores\\DeepMedicAll_scores.tsv", 1)
+box_plot( "D:\\Master\\DefinitiveFinalExperiments\\CNNAllDataNotResampled\\testing_indices_CNNAllDataNotResampled_scores.tsv", "D:\\Master\\DefinitiveFinalExperiments\\UnetFinalDataNotResampled\\testing_indices_UnetFinalDataNotResampled_scores.tsv", "D:\\Master\\deepmedicexperiments\\DeepMedicAllDataNotResampled_scores.tsv", 1)
