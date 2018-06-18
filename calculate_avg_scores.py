@@ -26,6 +26,6 @@ def find_average_dcs(filename):
         print("Sen $" + "%.5f" % average_sen + " \\pm " +  "%.5f" % np.std(sen_list) + "$")
         print("spe $" + "%.5f" % average_spe + " \\pm " +  "%.5f" % np.std(spe_list) + "$")
 
-find_average_dcs("D:\\Master\\DefinitiveFinalExperiments\\CNNAllFinal\\lbpa40_scores.txt")
+find_average_dcs("D:\\Master\\DefinitiveFinalExperiments\\UnetFinalLBPA40\\testing_indices_UnetFinalLBPA40_scores.tsv")
 # find_average_dcs("D:\\Master\\UnetShowdown\\UnetPatch48All\\testing_indices_UnetPatch48All_scores.tsv")
-# find_average_dcs("D:\\Master\\UnetShowdown\\UnetSmallerPatchAllAgain\\testing_indices_UnetSmallerPatchAllAgain_scores.tsv")
+# find_average_dcs("D:\\\Master\\UnetShowdown\\UnetSmallerPatchAllAgain\\testing_indices_UnetSmallerPatchAllAgain_scores.tsv")

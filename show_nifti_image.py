@@ -11,11 +11,12 @@ def expand_dim_of_nifti_image(nifti_image):
     return nib.Nifti1Image(new_data, None, nifti_image.get_header())
 
 def show_images():
-    prediction_file_location = "D:\\Master\\predicted\\UnetPredictions\\stolavs\\UnetSmallerPatchAllAgain_pred__coreg_T150_masked.nii.gz"
-    # prediction_file_location = "D:\\Master\\deepmedicexperiments\\predictions\\coreg_T117_processed_pred_Segm.nii.gz"
-    data_file_location = "D:\\MRISCANS\\NormalizedStOlavsResampled\\data\\"
-    data_file_name = "coreg_T150_processed.nii.gz"
-    label_file_location = "D:\\MRISCANS\\NormalizedStOlavsResampled\\labels\\icvMaskAuto_2013_T150_processed.nii.gz"
+    # prediction_file_location = "D:\\Master\\predicted\\predicted\\oasis\\CNNAllFinal_pred__OAS1_0012_MR1_mpr_n4_anon_111_t88_gfc_masked.nii.gz"
+    # prediction_file_location = "D:\\Master\\predicted\\predictions\\"
+    prediction_file_location = "D:\\Master\\predicted\\predictions\\volume-0_processed_pred_Segm.nii.gz"
+    data_file_location = "D:\\MRISCANS\\LITS\\LITSTrainingData\\"
+    data_file_name = "volume-0_processed.nii.gz"
+    label_file_location = "D:\\MRISCANS\\LITS\\LITSTrainingLabels\\segmentation-0_processed.nii.gz"
 
     arcSaveName = "DeepMedic"
 
@@ -50,7 +51,18 @@ def show_images():
     # label_plot.savefig(arcSaveName + data_file_name + "Label")
     # label_and_prediction_plot.savefig(arcSaveName + data_file_name + "LabelAndPrediction")
 
+def calculate_percentage_true():
+    # data = nib.load("D:\\MRISCANS\\LITS\\LITSTrainingLabels\\segmentation-0_processed.nii.gz").get_data()
+    # data = nib.load("D:\MRISCANS\\la\\OAS1_0001_MR1_mpr_n4_anon_111_t88_masked_gfc_fseg_processed.nii.gz").get_data()
+
+    elems = data.size
+    liver = np.count_nonzero(data)
+
+    percentage_liver = float(liver)/float(elems)
+    print(percentage_liver * 100)
+
 def main():
+    # calculate_percentage_true()
     show_images()
 
 main()

@@ -1,6 +1,10 @@
 from os import listdir as _listdir, getcwd, mkdir, path
 from os.path import isfile as _isfile,join as  _join, abspath, splitext
 
+def sort_func(s):
+   sort_string = s.split('/')[-1].rstrip()
+   return sort_string
+
 
 def load_files(data_file_location):
     data = []
@@ -24,6 +28,7 @@ def load_files(data_file_location):
         combined_list = combined_list + elem
 
     combined_list = strip_files_of_doubles(combined_list)
+    combined_list = sorted(combined_list, key=sort_func)
     return combined_list
 
 def strip_files_of_doubles(files):

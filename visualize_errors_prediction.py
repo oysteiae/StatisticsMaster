@@ -55,7 +55,7 @@ def visualize_errors(prediction_directory, label_directory):
     # plotting.plot_anat(nif)
     # plotting.plot_roi(nif, bg_img=nib.load(prediction_files[0]))
     plotting.show()
-    error_plot.savefig("ErrorLBPA40Unet")
+    error_plot.savefig("ErrorOASISCNN")
 
 
-visualize_errors("D:\\Master\\predicted\\UnetPredictions\\LBPA40\\", "D:\\MRISCANS\\NormalizedLBPA40Resampled\\labels\\")
+visualize_errors("D:\\Master\\predicted\\predicted\\oasis\\", "D:\\MRISCANS\\NormalizedOASIS\\labels\\")

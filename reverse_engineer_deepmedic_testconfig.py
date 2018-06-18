@@ -38,11 +38,11 @@ def reverse_engineer(experimentDirectory, data_directory):
     validation_channels = [d.replace('_processed', '') for d in validation_channels]
     test_channels = [d.replace('_processed', '') for d in test_channels]
 
-    train_channels = sorted(train_channels)
-    validation_channels = sorted(validation_channels)
-    test_channels = sorted(test_channels)
+    train_channels = sorted(train_channels, key=sort_func)
+    validation_channels = sorted(validation_channels, key=sort_func)
+    test_channels = sorted(test_channels, key=sort_func)
 
-    data = np.asarray([basename(d) for d in data_base])
+    data = np.asarray(sorted([basename(d) for d in data_base], key=sort_func))
     train_channels = [basename(d) for d in train_channels]
     validation_channels = [basename(d) for d in validation_channels]
     test_channels = [basename(d) for d in test_channels]
@@ -66,26 +66,26 @@ def reverse_engineer(experimentDirectory, data_directory):
         elif(data[i] in test_channels):
             testing_indices.append(i)
 
-    for line in data_base[testing_indices]:
+    for line in data[testing_indices]:
         print(line)
-
+    #
     print()
-
+    #
     for line in test_channels:
         print(line)
 
-    # experiment_directory = "D:\\Master\\ExperimentIndices\\"
-    # save_name = "AllDataNotResampled"
-    # with open(experiment_directory + save_name + "\\training_indices" + save_name + ".txt", "wb") as tr:
-    #     pickle.dump(training_indices, tr)
-    # with open(experiment_directory + save_name +  "\\validation_indices" + save_name + ".txt", "wb") as va:
-    #     pickle.dump(validation_indices, va)
-    # with open(experiment_directory + save_name + "\\testing_indices" + save_name + ".txt", "wb") as te:
-    #     pickle.dump(testing_indices, te)
+    experiment_directory = "D:\\Master\\ExperimentIndices\\"
+    save_name = "All"
+    with open(experiment_directory + save_name + "\\training_indices" + save_name + ".txt", "wb") as tr:
+        pickle.dump(training_indices, tr)
+    with open(experiment_directory + save_name +  "\\validation_indices" + save_name + ".txt", "wb") as va:
+        pickle.dump(validation_indices, va)
+    with open(experiment_directory + save_name + "\\testing_indices" + save_name + ".txt", "wb") as te:
+        pickle.dump(testing_indices, te)
 
     print(len(validation_indices + testing_indices + training_indices))
 
-reverse_engineer("D:/deepmedic/examples/configFiles/configAllDataNotResampled", ["D:\\MRISCANS\\StOlavsResampled\\data\\", "D:\\MRISCANS\\OASIS\\data\\", "D:\\MRISCANS\\LBPA40Resampled\\data\\"])
+reverse_engineer("D:/deepmedic/examples/configFiles/configAll", ["D:\\MRISCANS\\StOlavsResampled\\data\\", "D:\\MRISCANS\\OASIS\\data\\", "D:\\MRISCANS\\LBPA40Resampled\\data\\"])
 # reverse_engineer("D:/deepmedic/examples/configFiles/configStOlavs", ["D:\\MRISCANS\\StOlavsResampled\\data\\"])
 # D:\\MRISCANS\\NormalizedStOlavsResampled\\data\\ D:\\MRISCANS\\NormalizedOASIS\\data\\ D:\\MRISCANS\\NormalizedLBPA40Resampled\\data\\
 # reverse_engineer("D:/deepmedic/examples/configFiles/configAllDataNotResampled", ["D:\\MRISCANS\\NormalizedStOlavsResampled\\data\\", "D:\\MRISCANS\\NormalizedOASIS\\data\\", "D:\\MRISCANS\\NormalizedLBPA40Resampled\\data\\"])
