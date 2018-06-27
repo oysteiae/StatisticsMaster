@@ -61,8 +61,27 @@ def calculate_percentage_true():
     percentage_liver = float(liver)/float(elems)
     print(percentage_liver * 100)
 
+def show_image_and_label():
+    data_file_location = "D:\\MRISCANS\\StOlavs\\data\\coreg_T13.nii"
+    label_file_location = "D:\\MRISCANS\\StOlavs\\labels\\icvMaskAuto_2013_T13.nii"
+
+    data = nib.load(data_file_location)
+    label = nib.load(label_file_location)
+
+    label_and_prediction_plot = plotting.plot_roi(label, bg_img=data)
+    plotting.show()
+
+def show_image():
+    data_file_location = "D:\\MRISCANS\\StOlavs\\data\\coreg_T13.nii"
+
+    data = nib.load(data_file_location)
+
+    label_and_prediction_plot = plotting.plot_anat(data)
+    plotting.show()
+
+
 def main():
     # calculate_percentage_true()
-    show_images()
+    show_image_and_label()
 
 main()

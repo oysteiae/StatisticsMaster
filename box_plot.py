@@ -40,8 +40,10 @@ def box_plot(path_to_scores_cnn, path_to_scores_unet, path_to_scores_deepmedic, 
     ax.set_xticklabels(architectures,
                         rotation=45, fontsize=15)
 
-    plt.gcf().subplots_adjust(bottom=0.21)
+    plt.gcf().subplots_adjust(bottom=0.22)
     plt.show()
-    fig.savefig("C:\\Users\\oyste\\Documents\\Master\\graphs\\BoxPlotAll.png")
+    fig.savefig("D:\\Master\\Graphs\\BoxplotTrainedOnOne.png")
 
-box_plot( "D:\\Master\\DefinitiveFinalExperiments\\CNNAllDataNotResampled\\testing_indices_CNNAllDataNotResampled_scores.tsv", "D:\\Master\\DefinitiveFinalExperiments\\UnetFinalDataNotResampled\\testing_indices_UnetFinalDataNotResampled_scores.tsv", "D:\\Master\\deepmedicexperiments\\DeepMedicAllDataNotResampled_scores.tsv", 1)
+# box_plot( "D:\\Master\\DefinitiveFinalExperiments\\CNNAllDataNotResampled\\testing_indices_CNNAllDataNotResampled_scores.tsv", "D:\\Master\\DefinitiveFinalExperiments\\UnetFinalDataNotResampled\\testing_indices_UnetFinalDataNotResampled_scores.tsv", "D:\\Master\\deepmedicexperiments\\DeepMedicAllDataNotResampled_scores.tsv", 1)
+# box_plot( "D:\\Master\\DefinitiveFinalExperiments\\CNN40FromAll\\testing_indices_CNN40FromAll_scores.tsv", "D:\\Master\\DefinitiveFinalExperiments\\Unet40FromAll\\testing_indices_Unet40FromAll_scores.tsv", "D:\\Master\\deepmedicexperiments\\DeepMedic40FromAll_scores.tsv", 1)
+box_plot( "D:\\Master\\deepmedicexperiments\\combined_scores\\CNNScoresOne.txt", "D:\\Master\\deepmedicexperiments\\combined_scores\\UnetScoresOne.txt", "D:\\Master\\deepmedicexperiments\\combined_scores\\DeepMedicAllScoresOne.txt", 1)

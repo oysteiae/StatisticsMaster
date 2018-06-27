@@ -134,7 +134,6 @@ def graph_time_and_epochs(file_name):
 
     return epoch, time
 
->>>>>>> bbfcee33e2f3b46d9bf93bb4990f5afd5699d1c9
 # graph_accuracy("D:\\Master\\Experiments\\UnetBiggerPatch\\UnetBiggerPatch_logs.tsv", 1)
 def show_graph_accuracy():
     # graph_acc_and_val_acc("D:\\Master\\DefinitiveFinalExperiments\\UnetOnlyOASIS32Final\\UnetOnlyOASIS32Final_logs.tsv")
